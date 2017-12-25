@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { number, func } from "prop-types";
 
 import { Button } from "../button";
-import { Panel } from "../panel";
 
 export class Counter extends Component {
   static propTypes = {
@@ -29,17 +28,17 @@ export class Counter extends Component {
     }
   }
 
-  handleDecButtonClick = event => {
+  handleDecButtonClick = () => {
     this.change(-this.props.step);
   };
 
-  handleIncButtonClick = event => {
+  handleIncButtonClick = () => {
     this.change(+this.props.step);
   };
 
   render() {
     return (
-      <Panel>
+      <Wrapper>
         {this.props.children && <Label>{this.props.children}</Label>}
         <Button
           onClick={this.handleDecButtonClick}
@@ -54,10 +53,18 @@ export class Counter extends Component {
         >
           <ButtonContent>+</ButtonContent>
         </Button>
-      </Panel>
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled.div`
+  display: flex;
+
+  padding: 8px 0;
+
+  align-items: center;
+`;
 
 const Value = styled.div`
   min-width: 32px;

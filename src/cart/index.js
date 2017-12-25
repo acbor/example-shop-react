@@ -30,14 +30,16 @@ export class Cart extends Component {
     return (
       <Wrapper>
         <Name>CART</Name>
-        <TotalPrice>{this.totalPrice}</TotalPrice>
+        <TotalPrice>Total Price: {this.totalPrice}</TotalPrice>
         <CartList>
           {this.props.products.map(product => (
-            <CartItem
-              {...product}
-              onProductInCartChange={this.props.onProductInCartChange}
-              onProductDeleteFromCart={this.props.onProductDeleteFromCart}
-            />
+            <CartItemWrapper>
+              <CartItem
+                {...product}
+                onProductInCartChange={this.props.onProductInCartChange}
+                onProductDeleteFromCart={this.props.onProductDeleteFromCart}
+              />
+            </CartItemWrapper>
           ))}
         </CartList>
       </Wrapper>
@@ -46,6 +48,18 @@ export class Cart extends Component {
 }
 
 const Name = styled.div``;
-const TotalPrice = styled.div``;
-const Wrapper = styled.div``;
+const TotalPrice = styled.div`
+  color: darkblue;
+`;
+
+const CartItemWrapper = styled.div`
+  padding: 8px 0;
+`;
+
+const Wrapper = styled.div`
+  border: 1px solid black;
+  margin: 32px 0;
+  padding: 8px;
+`;
+
 const CartList = styled.div``;

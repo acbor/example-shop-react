@@ -28,8 +28,8 @@ export class CartItem extends Component {
   render() {
     return (
       <Wrapper>
-        <Label>{this.props.name}</Label>
-        <Label>{this.props.price}</Label>
+        <Name>{this.props.name}</Name>
+        <Price>${this.props.price}</Price>
         <Counter
           value={this.props.inCart}
           onChange={this.handleCountChange}
@@ -42,5 +42,12 @@ export class CartItem extends Component {
   }
 }
 
-const Wrapper = styled.div``;
-const Label = styled.div``;
+const Wrapper = styled.div`
+  border: 1px solid black;
+  padding: 8px;
+`;
+
+const Name = styled.div``;
+const Price = styled.div`
+  color: darkred;
+`;
