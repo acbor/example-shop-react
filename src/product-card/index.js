@@ -7,7 +7,7 @@ import { Panel } from "../panel";
 
 export class ProductCard extends Component {
   static propTypes = {
-    label: element.isRequired,
+    name: element.isRequired,
     price: number.isRequied,
     notInStock: bool,
     onChange: func.isRequired
@@ -21,7 +21,7 @@ export class ProductCard extends Component {
     return (
       <Panel>
         <Wrapper>
-          <Label>{this.props.label}</Label>
+          <Label>{this.props.name}</Label>
           {this.props.notInStock ? (
             "Not in stock"
           ) : (
