@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { number, func, element, bool } from "prop-types";
+import { any, number, func, string, bool } from "prop-types";
 
 import { Button } from "../button";
 import { Panel } from "../panel";
 
 export class ProductCard extends Component {
   static propTypes = {
-    name: element.isRequired,
+    id: any.isRequired,
+    name: string.isRequired,
     price: number.isRequired,
     notInStock: bool,
     onAddToCart: func.isRequired
@@ -18,7 +19,7 @@ export class ProductCard extends Component {
   };
 
   handleAddToCart = () => {
-    this.props.onAddToCart();
+    this.props.onAddToCart(this.props.id);
   };
 
   render() {
