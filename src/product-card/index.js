@@ -10,29 +10,31 @@ export class ProductCard extends Component {
     id: any.isRequired,
     name: string.isRequired,
     price: number.isRequired,
-    notInStock: bool,
+    inStock: number.isRequired,
+    inCart: number.isRequired,
     onAddToCart: func.isRequired
-  };
-
-  static defaultProps = {
-    notInStock: false
   };
 
   handleAddToCart = () => {
     this.props.onAddToCart(this.props.id);
   };
 
+  get canAddToCart() {
+    return this.props.inCart < this.props.inStock;
+  }
+
   render() {
+    console.log(this.props);
     return (
       <Panel>
         <Wrapper>
           <Label>{this.props.name}</Label>
-          {this.props.notInStock ? (
-            "Not in stock"
-          ) : (
+          {this.canAddToCart ? (
             <Button onClick={this.handleAddToCart}>
               Add to cart (+ ${this.props.price})
             </Button>
+          ) : (
+            "Not in stock"
           )}
         </Wrapper>
       </Panel>

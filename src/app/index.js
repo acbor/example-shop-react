@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import { CategoryCard } from "../category-card";
+import { Cart } from "../cart";
 
 export class App extends Component {
   state = {
@@ -17,67 +18,77 @@ export class App extends Component {
     products: {
       ids: [1, 3],
       entities: {
-        1: { id: 1, name: "DualShock 4", price: 100, count: 3 },
-        3: { id: 3, name: "Зажигалка 200 евро", price: 199, count: 1 },
-        4: { id: 4, name: "Зажигалка 100 евро", price: 299, count: 4 }
+        1: { id: 1, name: "DualShock 4", price: 100, inStock: 3 },
+        3: { id: 3, name: "Зажигалка 200 евро", price: 199, inStock: 1 },
+        4: { id: 4, name: "Зажигалка 100 евро", price: 299, inStock: 4 }
       }
     },
 
     cart: {}
   };
 
-  moveToCart(productId) {
+  setInCart(productId, newInCart) {
     this.setState(state => {
-      const inStock = state.products.entities[productId].count;
+      const inStock = state.products.entities[productId].inStock;
 
-      if (inStock > 0) {
+      if (newInCart <= inStock) {
         return {
-          products: {
-            ...state.products,
-            entities: {
-              ...state.products.entities,
-              [productId]: {
-                ...state.products.entities[productId],
-                count: inStock - 1
-              }
-            }
-          },
           cart: {
             ...state.cart,
-            [productId]: (state.cart[productId] || 0) + 1
+            [productId]: newInCart
           }
         };
       }
     });
   }
 
+  get productsIdsInCart() {
+    return Object.keys(this.state.cart)
+      .filter(productId => this.state.cart[productId] > 0)
+      .sort();
+  }
+
+  mapProductsIdsToProducts(productsIds) {
+    return productsIds
+      .map(productId => this.state.products.entities[productId])
+      .map(product => ({
+        ...product,
+        inCart: this.state.cart[product.id] || 0
+      }));
+  }
+
   handleAddProductToCart = productId => {
-    this.moveToCart(productId);
+    const inCart = this.state.cart[productId] || 0;
+
+    this.setInCart(productId, inCart + 1);
   };
 
-  renderCart() {
-    return <div>{JSON.stringify(this.state.cart)}</div>;
-  }
+  handleProductInCartChange = (productId, newInCart) => {
+    this.setInCart(productId, newInCart);
+  };
+
+  handleProductDeleteFromCart = productId => {
+    this.setInCart(productId, 0);
+  };
 
   render() {
     return (
       <Wrapper>
-        <div>
-          {this.state.categories.ids.map(categoryId => (
-            <CategoryCard
-              key={categoryId}
-              name={this.state.categories.entities[categoryId].name}
-              products={this.state.categories.entities[
-                categoryId
-              ].productsIds.map(
-                productId => this.state.products.entities[productId]
-              )}
-              onAddProductToCart={this.handleAddProductToCart}
-            />
-          ))}
-          {this.renderCart()}
-        </div>
-        <div>Hello</div>
+        {this.state.categories.ids.map(categoryId => (
+          <CategoryCard
+            key={categoryId}
+            name={this.state.categories.entities[categoryId].name}
+            products={this.mapProductsIdsToProducts(
+              this.state.categories.entities[categoryId].productsIds
+            )}
+            onAddProductToCart={this.handleAddProductToCart}
+          />
+        ))}
+        <Cart
+          products={this.mapProductsIdsToProducts(this.productsIdsInCart)}
+          onProductInCartChange={this.handleProductInCartChange}
+          onProductDeleteFromCart={this.handleProductDeleteFromCart}
+        />
       </Wrapper>
     );
   }
@@ -85,4 +96,5 @@ export class App extends Component {
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
 `;

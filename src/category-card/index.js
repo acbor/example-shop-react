@@ -12,8 +12,9 @@ export class CategoryCard extends Component {
       shape({
         id: any.isRequired,
         name: string.isRequired,
-        count: number.isRequired,
-        price: number.isRequired
+        inStock: number.isRequired,
+        price: number.isRequired,
+        inCart: number.isRequired
       }).isRequired
     ).isRequired,
     onAddProductToCart: func.isRequired
@@ -28,10 +29,7 @@ export class CategoryCard extends Component {
             {this.props.products.slice(0, 4).map(product => (
               <ProductWrapper key={product.id}>
                 <ProductCard
-                  id={product.id}
-                  name={product.name}
-                  price={product.price}
-                  notInStock={product.count === 0}
+                  {...product}
                   onAddToCart={this.props.onAddProductToCart}
                 />
               </ProductWrapper>
