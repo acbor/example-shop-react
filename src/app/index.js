@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 
 import { CategoryCard } from "../category-card";
 
@@ -60,21 +61,28 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.categories.ids.map(categoryId => (
-          <CategoryCard
-            key={categoryId}
-            name={this.state.categories.entities[categoryId].name}
-            products={this.state.categories.entities[
-              categoryId
-            ].productsIds.map(
-              productId => this.state.products.entities[productId]
-            )}
-            onAddProductToCart={this.handleAddProductToCart}
-          />
-        ))}
-        {this.renderCart()}
-      </div>
+      <Wrapper>
+        <div>
+          {this.state.categories.ids.map(categoryId => (
+            <CategoryCard
+              key={categoryId}
+              name={this.state.categories.entities[categoryId].name}
+              products={this.state.categories.entities[
+                categoryId
+              ].productsIds.map(
+                productId => this.state.products.entities[productId]
+              )}
+              onAddProductToCart={this.handleAddProductToCart}
+            />
+          ))}
+          {this.renderCart()}
+        </div>
+        <div>Hello</div>
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled.div`
+  display: flex;
+`;
