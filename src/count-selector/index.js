@@ -17,7 +17,7 @@ export class CountSelector extends Component {
   };
 
   handleCountChange = count => {
-    this.setState({ count: count });
+    this.setState({ count });
   };
 
   handleSubmit = event => {
@@ -27,7 +27,7 @@ export class CountSelector extends Component {
   };
 
   get total() {
-    return this.state.inStock * this.props.price;
+    return this.state.count * this.props.price;
   }
 
   render() {
@@ -37,7 +37,7 @@ export class CountSelector extends Component {
           <Form onSubmit={this.handleSubmit}>
             <CounterWrapper>
               <Counter
-                value={this.state.inStock}
+                value={this.state.count}
                 minValue={1}
                 maxValue={10}
                 onChange={this.handleCountChange}

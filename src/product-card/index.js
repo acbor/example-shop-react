@@ -1,40 +1,37 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { any, number, func, string, bool } from "prop-types";
+import { number, func, element, bool } from "prop-types";
 
 import { Button } from "../button";
 import { Panel } from "../panel";
 
 export class ProductCard extends Component {
   static propTypes = {
-    id: any.isRequired,
-    name: string.isRequired,
+    name: element.isRequired,
     price: number.isRequired,
-    inStock: number.isRequired,
-    inCart: number.isRequired,
+    notInStock: bool,
     onAddToCart: func.isRequired
   };
 
-  handleAddToCart = () => {
-    this.props.onAddToCart(this.props.id);
+  static defaultProps = {
+    notInStock: false
   };
 
-  get canAddToCart() {
-    return this.props.inCart < this.props.inStock;
-  }
+  handleAddToCart = () => {
+    this.props.onAddToCart();
+  };
 
   render() {
-    console.log(this.props);
     return (
       <Panel>
         <Wrapper>
           <Label>{this.props.name}</Label>
-          {this.canAddToCart ? (
+          {this.props.notInStock ? (
+            "Not in stock"
+          ) : (
             <Button onClick={this.handleAddToCart}>
               Add to cart (+ ${this.props.price})
             </Button>
-          ) : (
-            "Not in stock"
           )}
         </Wrapper>
       </Panel>
