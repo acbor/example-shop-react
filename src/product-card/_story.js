@@ -13,7 +13,7 @@ storiesOf("ProductCard", module)
       price={100}
       inStock={5}
       inCart={0}
-      onAddToCart={action("onChange")}
+      onAddToCart={action("onAddToCart")}
     />
   ))
   .add("not in stock", () => (
@@ -23,6 +23,6 @@ storiesOf("ProductCard", module)
       price={100}
       inStock={5}
       inCart={5}
-      onAddToCart={action("onChange")}
+      onAddToCart={action("onAddToCart")}
     />
   ));

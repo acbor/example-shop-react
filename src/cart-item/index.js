@@ -10,7 +10,7 @@ export class CartItem extends Component {
   static propTypes = {
     id: number.isRequired,
     name: string.isRequired,
-    price: string.isRequired,
+    price: number.isRequired,
     inStock: number.isRequired,
     inCart: number.isRequired,
     onProductInCartChange: func.isRequired,
@@ -22,8 +22,8 @@ export class CartItem extends Component {
   };
 
   handleProductDeleteFromCart = () => {
-    this.props.onProductDeleteFromCart(this.props.id)
-  }
+    this.props.onProductDeleteFromCart(this.props.id);
+  };
 
   render() {
     return (
