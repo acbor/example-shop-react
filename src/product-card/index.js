@@ -8,13 +8,17 @@ import { Panel } from "../panel";
 export class ProductCard extends Component {
   static propTypes = {
     name: element.isRequired,
-    price: number.isRequied,
+    price: number.isRequired,
     notInStock: bool,
-    onChange: func.isRequired
+    onAddToCart: func.isRequired
   };
 
   static defaultProps = {
     notInStock: false
+  };
+
+  handleAddToCart = () => {
+    this.props.onAddToCart();
   };
 
   render() {
@@ -25,7 +29,9 @@ export class ProductCard extends Component {
           {this.props.notInStock ? (
             "Not in stock"
           ) : (
-            <Button>Add to cart (+ ${this.props.price})</Button>
+            <Button onClick={this.handleAddToCart}>
+              Add to cart (+ ${this.props.price})
+            </Button>
           )}
         </Wrapper>
       </Panel>

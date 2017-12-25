@@ -7,13 +7,13 @@ import { ProductCard } from ".";
 
 storiesOf("ProductCard", module)
   .add("normal", () => (
-    <ProductCard name="Name" price={100} onChange={action("onChange")} />
+    <ProductCard name="Name" price={100} onAddToCart={action("onChange")} />
   ))
   .add("not in stock", () => (
     <ProductCard
       name="Name"
       price={100}
       notInStock
-      onChange={action("onChange")}
+      onAddToCart={action("onChange")}
     />
   ));
