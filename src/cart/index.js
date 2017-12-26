@@ -53,7 +53,9 @@ const TotalPrice = styled.div`
 `;
 
 const CartItemWrapper = styled.div`
-  padding: 8px 0;
+  padding: 8px 8px;
+  width: 200px;
+  display: inline-block;
 `;
 
 const Wrapper = styled.div`
