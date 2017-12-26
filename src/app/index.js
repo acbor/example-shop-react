@@ -10,8 +10,8 @@ export class App extends Component {
       ids: [1, 2, 3],
       entities: {
         1: { id: 1, name: "Pads", productsIds: [1] },
-        2: { id: 2, name: "Tools", productsIds: [3, 4] },
-        3: { id: 3, name: "Food", productsIds: [] }
+        2: { id: 2, name: "Tools", productsIds: [3, 4, 5] },
+        3: { id: 3, name: "Food", productsIds: [6] }
       }
     },
 
@@ -20,7 +20,9 @@ export class App extends Component {
       entities: {
         1: { id: 1, name: "DualShock 4", price: 100, inStock: 3 },
         3: { id: 3, name: "Зажигалка 200 евро", price: 199, inStock: 1 },
-        4: { id: 4, name: "Зажигалка 100 евро", price: 299, inStock: 4 }
+        4: { id: 4, name: "Зажигалка 100 евро", price: 299, inStock: 4 },
+        5: { id: 5, name: "Дилдо: Черный Властелин", price: 13, inStock: 18 },
+        6: { id: 6, name: "Хлебушек", price: 2, inStock: 24 }
       }
     },
 

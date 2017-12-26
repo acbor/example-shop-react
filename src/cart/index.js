@@ -33,7 +33,7 @@ export class Cart extends Component {
         <TotalPrice>Total Price: {this.totalPrice}</TotalPrice>
         <CartList>
           {this.props.products.map(product => (
-            <CartItemWrapper>
+            <CartItemWrapper key={product.id}>
               <CartItem
                 {...product}
                 onProductInCartChange={this.props.onProductInCartChange}
